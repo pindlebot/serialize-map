@@ -1,8 +1,7 @@
 const chai = require('chai')
 const assert = chai.assert
 const expect = chai.expect
-const { fromJSON, toJSON, merge } = require('../')
-const EnhancedMap = require('../EnhancedMap')
+const { fromJSON, toJSON, merge, EnhancedMap } = require('../')
 
 var pojo = {
   depth_0: {
@@ -56,7 +55,7 @@ describe('EnhancedMap.fromJSON/EnhancedMap.toJSON', function () {
 
 describe('EnhancedMap.merge', function () {
   it('EnhancedMap.merge', function () {
-    let json = new EnhancedMap().fromJSON(pojo).merge(pojo2).toJSON()
+    let json = EnhancedMap.create().fromJSON(pojo).merge(pojo2).toJSON()
     assert.deepEqual(json, { ...pojo, ...pojo2 })
   })
 })

@@ -1,14 +1,13 @@
 const { fromJSON, toJSON, merge, getIn, setIn } = require('./')
 
 class EnhancedMap extends Map {
-  constructor (props) {
-    return EnhancedMap.create(props)
-  }
-
   static create (props) {
-  	const map = props instanceof Map ? props : new Map(props)
-    map['__proto__'] = EnhancedMap.prototype
-    return map
+    const self = (Object.getPrototypeOf(this) === Map.prototype) 
+      ? this 
+      : new Map(props);
+    Object.setPrototypeOf(self, EnhancedMap.prototype);
+    
+    return self;
   }
 
   static mixin (func) {
@@ -22,6 +21,9 @@ class EnhancedMap extends Map {
     }
   }
 }
+
+require('util').inherits(EnhancedMap, Map);
+Object.setPrototypeOf(EnhancedMap, Map);
 
 EnhancedMap.mixin(fromJSON)
 EnhancedMap.mixin(toJSON)
