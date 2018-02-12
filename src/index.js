@@ -1,4 +1,5 @@
 const toPath = require('lodash.topath')
+const entries = require('object.entries')
 
 function toJSON(value, opts = { set: false }) {
   return [...value.entries()]
@@ -15,9 +16,9 @@ function toJSON(value, opts = { set: false }) {
 }
 
 function fromJSON(...args) {
-  const json = args.find(arg => arg.constructor === Object)
+  const json = args.find(arg => arg.constructor === Object) || {}
   return new Map([
-    ...Object.entries(json).map(([k, v]) => {
+    ...entries(json).map(([k, v]) => {
       if (v instanceof Map) {
         return [k, fromJSON(v)]
       }
@@ -30,19 +31,18 @@ function fromJSON(...args) {
 }
 
 function merge (value, props) {
-  let entries
   if (
     typeof props === 'object' &&
     props.constructor === Object
   ) {
-    entries = Object.entries(props)
+    props = entries(props)
   } else if (props instanceof Map) {
-    entries = props
+    
   } else {
     return value
   }
 
-  for (let [k, v] of entries) {
+  for (let [k, v] of props) {
     value.set(k, v)
   }
   return value
