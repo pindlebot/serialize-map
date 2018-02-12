@@ -73,7 +73,10 @@ describe('EnhancedMap.toJSON', function() {
   it('EnhancedMap.toJSON', function() {
     var obj = { 
       ExpressionAttributeValues: { 
-        repos: new Map ([['page', 0], ['index', 0]]),
+        repos: {
+          key: new Map ([['page', 0], ['index', 0]]),
+          
+        }
       }
     }
     

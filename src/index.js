@@ -5,7 +5,6 @@ function toJSON(value, opts = { set: false }) {
   return [...value.entries()]
     .reduce((acc, [k, v]) => {
       if (v instanceof Map) {
-        console.log('v instanceof Map', v)
         acc[k] = toJSON(v)
       } else if (opts.set && v instanceof Set) {
         acc[k] = [...v]
