@@ -19,7 +19,6 @@ function toJSON(value, opts = { set: false }) {
 function fromJSON(...args) {
   const json = args[args.length - 1]
   const iterable = json instanceof Map ? [...json.entries()] : entries(json)
-  console.log('iterable', iterable)
   return new Map(
     iterable.map(([k, v]) => {
       if (v instanceof Map) {
