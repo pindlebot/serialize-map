@@ -8,10 +8,9 @@
     "build": "babel src -d lib"
   },
   "devDependencies": {
-    "@babel/core": "7.0.0-beta.39",
     "@babel/cli": "^7.0.0-beta.39",
+    "@babel/core": "7.0.0-beta.39",
     "babel-preset-aws-lambda": "^1.0.2",
-    "babel-preset-env": "^1.6.1",
     "chai": "^4.1.2",
     "mocha": "^5.0.0"
   },
