@@ -2,7 +2,11 @@ const toPath = require('lodash.topath')
 const entries = require('object.entries')
 
 function toJSON(value, opts = { set: false }) {
-  return [...value.entries()]
+  const iterable = value instanceof Map 
+    ? [...value.entries()] 
+    : entries(value)
+
+  return iterable
     .reduce((acc, [k, v]) => {
       if (v instanceof Map) {
         acc[k] = toJSON(v)
