@@ -59,3 +59,11 @@ describe('EnhancedMap.merge', function () {
     assert.deepEqual(json, { ...pojo, ...pojo2 })
   })
 })
+
+
+describe('EnhancedMap.set', function () {
+  it('EnhancedMap.set', function () {
+    let json = EnhancedMap.create().set('key', 'value').toJSON()
+    assert.deepEqual(json, { key: 'value' })
+  })
+})

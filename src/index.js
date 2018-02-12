@@ -15,11 +15,8 @@ function toJSON(value, opts = { set: false }) {
 }
 
 function fromJSON(...args) {
-  if (!args.length) return
-  let value = args.length > 1 ? args[0] : undefined
-  let json = args.length > 1 ? args[1] : args[0]
-
-  const map = new Map([
+  const json = args.find(arg => arg.constructor === Object)
+  return new Map([
     ...Object.entries(json).map(([k, v]) => {
       if (v instanceof Map) {
         return [k, fromJSON(v)]
@@ -30,8 +27,6 @@ function fromJSON(...args) {
       return [k, v]
     })
   ])
-
-  return value ? merge(value, map) : map
 }
 
 function merge (value, props) {

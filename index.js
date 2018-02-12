@@ -1,4 +1,4 @@
-const useLib = parseInt(process.versions.node, 10) < 6.5
+const useLib = parseInt(process.versions.node, 10) < 8
 
 exports.EnhancedMap = useLib ? require('./lib/EnhancedMap') : require('./src/EnhancedMap')
 
