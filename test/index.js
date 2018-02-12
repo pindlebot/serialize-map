@@ -67,3 +67,19 @@ describe('EnhancedMap.set', function () {
     assert.deepEqual(json, { key: 'value' })
   })
 })
+
+
+describe('EnhancedMap.toJSON', function() {
+  it('EnhancedMap.toJSON', function() {
+    var obj = { 
+      ExpressionAttributeValues: { 
+        repos: new Map ([['page', 0], ['index', 0]]),
+      }
+    }
+    
+    var map = EnhancedMap.create().fromJSON(obj)
+    console.log('map',map)
+    console.log(map.toJSON())
+    assert.deepEqual(obj, map.toJSON())
+  })
+})
